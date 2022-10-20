@@ -54,3 +54,11 @@ jobs:
           curl -Os https://uploader.codecov.io/latest/linux/codecov
           chmod +x codecov
           ./codecov
+          
+      - name: Download Scantist-Bom-Detect
+        run: curl -s https://download.scantist.io/scantist-bom-detect.jar --output scantist-bom-detect.jar
+      
+      - name: Upload to Scantist 
+        env: # Setting the Token
+          SCANTISTTOKEN: ${{secrets.SCANTISTTOKEN }}
+        run: java -jar scantist-bom-detect.jar
